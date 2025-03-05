@@ -1,3 +1,3 @@
 import WebTorrent from 'webtorrent'
 
-export const WebtorrentClient = new WebTorrent({dht : false})
+export const WebtorrentClient = new WebTorrent()
