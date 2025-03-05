@@ -17,8 +17,7 @@ import AuthenticateRouter from './routes/authenticate.route.js'
 import UserRouter from './routes/user.route.js'
 import CommentController from './routes/comment.route.js'
 import AdminRouter from './routes/admin.route.js'
-import { WebtorrentClient } from './helper/webtorrent.js'
-import Videos from './models/video.model.js'
+
 
 const app = express()
 //load config file
@@ -78,11 +77,6 @@ app.get('*', (req, res, next) => {
 app.use((err, req, res, next) => {
     return res.status(500).send('Something broke!')
 })
-
-let t = await Videos.findAll()
-t.map(x => x.toJSON()).forEach(element => {
-    WebtorrentClient.seed('./public/videos/'+ element.videoPath , async (torrent) => {})
-});
 
 
 //start server

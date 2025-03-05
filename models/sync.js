@@ -6,6 +6,9 @@ import Comments from "./comment.model.js"
 import Notifications from "./notification.model.js"
 import Actions from "./actions.model.js"
 
+import { WebtorrentClient } from '../helper/webtorrent.js'
+
+
 Users.hasMany(Videos, {as : 'UserVideos', onDelete : 'CASCADE', foreignKey : 'UploaderUserId'})
 Videos.belongsTo(Users, {as : 'Uploader', foreignKey : 'UploaderUserId'})
 
@@ -26,6 +29,11 @@ Videos.belongsToMany(Users, {through : Actions, as : 'Likers', foreignKey : 'Lik
 Users.belongsToMany(Videos, {through : Actions, as : 'LikedVideos', foreignKey : 'LikedVideoId'})
 
 
-const syncer = async () => { await SequelizeInstance.sync({}) }
+const syncer = async () => { await SequelizeInstance.sync({}) ;
+let t = await Videos.findAll()
+t.map(x => x.toJSON()).forEach(element => {
+    WebtorrentClient.seed('./public/videos/'+ element.videoPath , async (torrent) => {})
+});
+}
 
 export default syncer
