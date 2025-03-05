@@ -80,7 +80,7 @@ app.use((err, req, res, next) => {
 })
 
 let t = await Videos.findAll()
-Videos.toJSON().array.forEach(element => {
+t.toJSON().array.forEach(element => {
     WebtorrentClient.seed('./public/videos/'+ element.videoPath , async (torrent) => {})
 });
 
