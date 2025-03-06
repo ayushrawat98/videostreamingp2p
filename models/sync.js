@@ -6,7 +6,7 @@ import Comments from "./comment.model.js"
 import Notifications from "./notification.model.js"
 import Actions from "./actions.model.js"
 
-import { WebtorrentClient } from '../helper/webtorrent.js'
+import  WebtorrentClient  from '../helper/webtorrent.js'
 
 
 Users.hasMany(Videos, { as: 'UserVideos', onDelete: 'CASCADE', foreignKey: 'UploaderUserId' })
@@ -36,6 +36,7 @@ const syncer = async () => {
     let t = await Videos.findAll()
     t.map(x => x.toJSON()).forEach(element => {
         WebtorrentClient.seed('./public/videos/' + element.videoPath, async (torrent) => { })
+        
     });
 }
 
