@@ -8,7 +8,7 @@ import Subscriptions from '../models/subscription.model.js'
 import Actions from '../models/actions.model.js'
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-import { WebtorrentClient } from '../helper/webtorrent.js'
+import WebtorrentClient  from '../helper/webtorrent.js'
 
 
 
