@@ -93,7 +93,8 @@ export const postVideos = async (req, res, next) => {
             //         let addedVideo = await Videos.create({ title: videoTitle, description: videoDescription, videoPath: req.file.filename, views: 0, UploaderUserId: req.user.id , infoHash : torrent.magnetURI})
             //         generateThumbnail(req.file.filename, addedVideo.id, 'newFileName')
             // })
-            let addedVideo = await Videos.create({ title: videoTitle, description: videoDescription, videoPath: newFileName, views: 0, UploaderUserId: req.user.id , infoHash : torrent.magnetURI})
+            // infoHash : torrent.magnetURI
+            let addedVideo = await Videos.create({ title: videoTitle, description: videoDescription, videoPath: newFileName, views: 0, UploaderUserId: req.user.id , infoHash : ""})
             generateThumbnail(req.file.filename, addedVideo.id, newFileName)
             return res.status(200).json({ message: "Upload completed" })
         } catch (error) {
