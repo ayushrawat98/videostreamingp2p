@@ -201,12 +201,13 @@ export const getVideoDetail = async (req, res, next) => {
     })
 
     //likes and dislikes
-    let likesdislikes = await Actions.findAll({
-        where: {
-            LikedVideoId: req.params.videoId
-        },
-        attributes: ['LikerUserId', 'action']
-    })
+    // let likesdislikes = await Actions.findAll({
+    //     where: {
+    //         LikedVideoId: req.params.videoId
+    //     },
+    //     attributes: ['LikerUserId', 'action']
+    // })
+    let likesdislikes = []
 
     let token = req.clientIpAddressFound + '-' + req.params.videoId
     if(uniqueviewers[token] == undefined || uniqueviewers[token].date != new Date().getDate()){
