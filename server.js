@@ -59,7 +59,6 @@ app.use(ipMiddleware)
 
 //DB
 syncer()
-// createAdmin()
 
 //routes
 app.use("/server/video", VideoRouter)

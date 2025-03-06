@@ -5,8 +5,9 @@ import Subscriptions from "./subscription.model.js"
 import Comments from "./comment.model.js"
 import Notifications from "./notification.model.js"
 import Actions from "./actions.model.js"
+import createAdmin from "../helper/createAdmin.js"
 
-import  WebtorrentClient  from '../helper/webtorrent.js'
+// import  WebtorrentClient  from '../helper/webtorrent.js'
 
 
 Users.hasMany(Videos, { as: 'UserVideos', onDelete: 'CASCADE', foreignKey: 'UploaderUserId' })
@@ -32,13 +33,23 @@ Users.belongsToMany(Videos, { through: Actions, as: 'LikedVideos', foreignKey: '
 const syncer = async () => {
     await SequelizeInstance.sync({});
 
+    let admin = await Users.findOne({
+        where : {
+            isAdmin : true
+        }
+    })
+
+    if(!admin){
+        createAdmin()
+    }
+
     //seed the torrents on startup
-    let t = await Videos.findAll()
-    WebtorrentClient.setMaxListeners(Infinity)
-    t.map(x => x.toJSON()).forEach(element => {
-        WebtorrentClient.seed('./public/videos/' + element.videoPath, async (torrent) => { })
+    // let t = await Videos.findAll()
+    // WebtorrentClient.setMaxListeners(Infinity)
+    // t.map(x => x.toJSON()).forEach(element => {
+    //     WebtorrentClient.seed('./public/videos/' + element.videoPath, async (torrent) => { })
         
-    });
+    // });
 }
 
 export default syncer
