@@ -46,7 +46,7 @@ const syncer = async () => {
     let allvideos = await Videos.findAll()
     allvideos.forEach(x => {
         WebtorrentClient.seed('./public/videos/'+ x.videoPath , async (torrent) => {
-            console.log(magnetURI)
+            console.log(torrent.magnetURI)
            await x.update({infoHash : torrent.magnetURI})
     })
     })
