@@ -43,22 +43,22 @@ const syncer = async () => {
         createAdmin()
     }
 
-    let allvideos = await Videos.findAll()
-    allvideos.forEach(x => {
-        WebtorrentClient.seed('./public/videos/'+ x.videoPath , async (torrent) => {
-            console.log(torrent.magnetURI)
-           await x.update({infoHash : torrent.magnetURI})
-    })
-    })
+    // let allvideos = await Videos.findAll()
+    // allvideos.forEach(x => {
+    //     WebtorrentClient.seed('./public/videos/'+ x.videoPath , async (torrent) => {
+    //         console.log(torrent.magnetURI)
+    //        await x.update({infoHash : torrent.magnetURI})
+    // })
+    // })
     
 
     //seed the torrents on startup
-    // let t = await Videos.findAll()
-    // WebtorrentClient.setMaxListeners(Infinity)
-    // t.map(x => x.toJSON()).forEach(element => {
-    //     WebtorrentClient.seed('./public/videos/' + element.videoPath, async (torrent) => { })
+    let t = await Videos.findAll()
+    WebtorrentClient.setMaxListeners(Infinity)
+    t.map(x => x.toJSON()).forEach(element => {
+        WebtorrentClient.seed('./public/videos/' + element.videoPath, async (torrent) => { })
         
-    // });
+    });
 }
 
 export default syncer

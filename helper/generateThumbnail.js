@@ -13,7 +13,7 @@ function generateThumbnail(path, filename, newFileName) {
   })
     .on('end', () => {
       // console.log('Thumbnail generated successfully.');
-      generateFast(path, newFileName)
+      // generateFast(path, newFileName)
     })
     .on('error', (err) => {
       console.error('Error generating thumbnail:', err);
