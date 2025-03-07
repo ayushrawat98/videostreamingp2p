@@ -282,5 +282,5 @@ export const downloadVideo = async (req, res, next) => {
         }
     })
 
-    return res.sendFile((path.join(dirname(fileURLToPath(import.meta.url)), "../public/videos/")) + video.videoname)
+    return res.sendFile((path.join(dirname(fileURLToPath(import.meta.url)), "../public/videos/")) + video.videoPath)
 }

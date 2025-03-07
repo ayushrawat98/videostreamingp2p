@@ -10,9 +10,9 @@ const deleteVideoFile = async (toBeDeletedVideo) => {
         }
      })
      //delete video
-     fs.unlink('./public/videos/'+ toBeDeletedVideo.videoname, (err) => {
+     fs.unlink('./public/videos/'+ toBeDeletedVideo.videoPath, (err) => {
         if(err){
-        fs.appendFile('./public/failed.txt', `delete /video/${toBeDeletedVideo.videoname}` , (err)=>{})
+        fs.appendFile('./public/failed.txt', `delete /video/${toBeDeletedVideo.videoPath}` , (err)=>{})
         }
      })
 }

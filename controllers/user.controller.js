@@ -175,7 +175,7 @@ export const deleteVideoById = async (req, res, next) => {
         }
     })
     
-    if(toBeDeletedVideo && toBeDeletedVideo.UserId != req.user.id){
+    if(toBeDeletedVideo && toBeDeletedVideo.UploaderUserId != req.user.id){
         return res.status(400).json({message : "Hacker spotted!"})
     }
 

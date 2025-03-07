@@ -25,7 +25,7 @@ cron.schedule('0 0 * * *', async () => {
         })
         //delete video and thumbnail
         fs.unlink('./public/thumbnails/'+x.id + '.jpg', (err) => {})
-        fs.unlink('./public/videos/'+ x.videoname, (err) => {})
+        fs.unlink('./public/videos/'+ x.videoPath, (err) => {})
       })
 
 
