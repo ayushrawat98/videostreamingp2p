@@ -194,11 +194,12 @@ export const getVideoDetail = async (req, res, next) => {
     }
 
     //subscriber count
-    let totalsubscribers = await Subscriptions.findAndCountAll({
-        where: {
-            subscribedto_id: videoDetail.toJSON().UploaderUserId
-        }
-    })
+    // let totalsubscribers = await Subscriptions.findAndCountAll({
+    //     where: {
+    //         subscribedto_id: videoDetail.toJSON().UploaderUserId
+    //     }
+    // })
+    let totalsubscribers = {count : 0}
 
     //likes and dislikes
     // let likesdislikes = await Actions.findAll({
