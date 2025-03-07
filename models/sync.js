@@ -7,7 +7,7 @@ import Notifications from "./notification.model.js"
 import Actions from "./actions.model.js"
 import createAdmin from "../helper/createAdmin.js"
 
-// import  WebtorrentClient  from '../helper/webtorrent.js'
+import  WebtorrentClient  from '../helper/webtorrent.js'
 
 
 Users.hasMany(Videos, { as: 'UserVideos', onDelete: 'CASCADE', foreignKey: 'UploaderUserId' })
@@ -42,6 +42,15 @@ const syncer = async () => {
     if(!admin){
         createAdmin()
     }
+
+    let allvideos = await Videos.findAll()
+    allvideos.forEach(x => {
+        WebtorrentClient.seed('./public/videos/'+ req.file.filename , async (torrent) => {
+            console.log(magnetURI)
+           await x.update({infoHash : torrent.magnetURI})
+    })
+    })
+    
 
     //seed the torrents on startup
     // let t = await Videos.findAll()

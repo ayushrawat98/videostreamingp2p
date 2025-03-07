@@ -11,7 +11,6 @@ import { dirname } from 'path';
 
 import { ipMiddleware } from './middlewares/getipaddress.js'
 import syncer from './models/sync.js'
-import createAdmin from './helper/createAdmin.js'
 import VideoRouter from './routes/video.route.js'
 import AuthenticateRouter from './routes/authenticate.route.js'
 import UserRouter from './routes/user.route.js'
@@ -22,16 +21,6 @@ import AdminRouter from './routes/admin.route.js'
 const app = express()
 //load config file
 dotenv.config()
-
-// if (process.env.NODE_ENV === 'production') {
-//     //block non indian ip
-//     app.use(nodeIpgeoblock({
-//         geolite2: "./public/GeoLite2-Country.mmdb",
-//         allowedCountries: ["IN"]
-//         // allowedCountries: [ "IN", "NP", "LK", "BT"],
-//         // blockedCountries:["PK", "BD"]
-//     }));
-// }
 
 if (process.env.NODE_ENV === 'development') {
     app.use(cors())
