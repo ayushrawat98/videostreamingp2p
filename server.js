@@ -38,7 +38,7 @@ if (process.env.NODE_ENV === 'production') {
 
 
 //serve index.html
-app.use(express.static(path.join(dirname(fileURLToPath(import.meta.url)), "public/angular"), {cacheControl : true, maxAge : "1h"}));
+app.use(express.static(path.join(dirname(fileURLToPath(import.meta.url)), "public"), {cacheControl : true, maxAge : "1h"}));
 
 //parse json data
 app.use(express.json())
@@ -50,15 +50,15 @@ app.use(ipMiddleware)
 syncer()
 
 //routes
-app.use("/server/video", VideoRouter)
-app.use("/server/authenticate", AuthenticateRouter)
-app.use("/server/user", UserRouter)
-app.use("/server/comment", CommentController)
-app.use("/server/admin", AdminRouter)
+app.use("/api/video", VideoRouter)
+app.use("/api/authenticate", AuthenticateRouter)
+app.use("/api/user", UserRouter)
+app.use("/api/comment", CommentController)
+app.use("/api/admin", AdminRouter)
 
 //send angular index.html and use its routing
 app.get('*', (req, res, next) => {
-    return res.sendFile(path.join(dirname(fileURLToPath(import.meta.url)), 'public', 'angular', 'index.html'))
+    return res.sendFile(path.join(dirname(fileURLToPath(import.meta.url)), 'public', 'index.html'))
 })
 
 //handle any error
