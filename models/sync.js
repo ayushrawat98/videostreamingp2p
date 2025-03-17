@@ -60,6 +60,7 @@ const syncer = async () => {
             torrent.removeAllListeners()
             console.log('seeding')
          })
+         WebtorrentClient.removeAllListeners()
     });
 }
 
