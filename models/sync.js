@@ -56,10 +56,10 @@ const syncer = async () => {
     let t = await Videos.findAll()
     // WebtorrentClient.setMaxListeners(Infinity)
     t.map(x => x.toJSON()).forEach(element => {
-        setTimeout( () => WebtorrentClient.seed('./public/videos/' + element.videoPath, async (torrent) => {
+        WebtorrentClient.seed('./public/videos/' + element.videoPath, async (torrent) => {
+            torrent.removeAllListeners()
             console.log('seeding')
-         }) ,1000)
-        
+         })
     });
 }
 
