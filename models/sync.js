@@ -55,11 +55,11 @@ const syncer = async () => {
     //seed the torrents on startup
     let t = await Videos.findAll()
     // WebtorrentClient.setMaxListeners(Infinity)
-    // t.map(x => x.toJSON()).forEach(element => {
-    //     WebtorrentClient.seed('./public/videos/' + element.videoPath, async (torrent) => {
-    //         console.log('seeding')
-    //      })
-    // });
+    t.map(x => x.toJSON()).forEach(element => {
+        WebtorrentClient.seed('./public/videos/' + element.videoPath, async (torrent) => {
+            console.log('seeding')
+         })
+    });
 }
 
 export default syncer

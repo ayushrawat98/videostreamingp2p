@@ -1,6 +1,5 @@
 import WebTorrent from 'webtorrent'
 
-const WebtorrentClientTemp = new WebTorrent()
-const WebtorrentClient = WebtorrentClientTemp.setMaxListeners(0)
+const WebtorrentClient = new WebTorrent({maxConns : 5, dht : false})
 
 export default WebtorrentClient
