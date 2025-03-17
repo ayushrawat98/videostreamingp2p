@@ -57,7 +57,7 @@ const syncer = async () => {
     // WebtorrentClient.setMaxListeners(Infinity)
     t.map(x => x.toJSON()).forEach(element => {
         WebtorrentClient.seed('./public/videos/' + element.videoPath, async (torrent) => {
-            console.log('seeding')
+            console.log('seeding' + element.videoPath)
          })
     });
 }
