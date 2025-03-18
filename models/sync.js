@@ -57,8 +57,6 @@ const syncer = async () => {
     // WebtorrentClient.setMaxListeners(Infinity)
     t.map(x => x.toJSON()).forEach(element => {
         WebtorrentClient.seed('./public/videos/' + element.videoPath, async (torrent) => {
-            WebtorrentClient.removeAllListeners('data')
-            torrent.removeAllListeners('data')
             console.log('seeding')
          })
         
