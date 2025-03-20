@@ -8,7 +8,6 @@ import Actions from "./actions.model.js"
 import createAdmin from "../helper/createAdmin.js"
 
 import  WebtorrentClient  from '../helper/webtorrent.js'
-import Ffmpeg from "fluent-ffmpeg"
 
 
 Users.hasMany(Videos, { as: 'UserVideos', onDelete: 'CASCADE', foreignKey: 'UploaderUserId' })
@@ -33,8 +32,6 @@ Users.belongsToMany(Videos, { through: Actions, as: 'LikedVideos', foreignKey: '
 
 const syncer = async () => {
     await SequelizeInstance.sync({});
-
-    makevideothumbnails()
 
     let admin = await Users.findOne({
         where : {
@@ -64,39 +61,6 @@ const syncer = async () => {
          })
         
     });
-}
-
-async function makevideothumbnails(){
-    //  Ffmpeg.setFfmpegPath('C:\\Users\\aayus\\Downloads\\ffmpeg-master-latest-win64-gpl\\bin\\ffmpeg.exe')
-    let videos = await Videos.findAll({})
-    let videosjson = videos.map(x => x.toJSON())
-    for(let v of videosjson){
-    Ffmpeg.ffprobe(`public/videos/${v.videoPath}`, (err, metadata) => {
-        if(err){
-            console.log(err)
-        }
-    if (metadata) {
-      const duration = metadata.format.duration
-      const timestamps = [
-         duration / 4, duration / 2, 3*duration/4, duration-1
-      ]
-        Ffmpeg(`public/videos/${v.videoPath}`)
-          .screenshots({
-            timestamps: [...timestamps], // Capture a thumbnail at 1 second into the video
-            filename: `${v.id}-%i.jpg`, // Generate a unique filename
-            folder: 'public/thumbnails',
-            size: "320x180"
-          })
-          .on('end', () => {
-            console.log('Thumbnail generated successfully.');
-            // generateFast(path, newFileName)
-          })
-          .on('error', (err) => {
-            console.error('Error generating thumbnail:', err);
-          });
-    }
-  })
-}
 }
 
 export default syncer
