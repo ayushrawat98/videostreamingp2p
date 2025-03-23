@@ -53,7 +53,7 @@ export const deleteUserById = async (req, res, next) => {
 
     const allVideos = await Videos.findAll({
         where : {
-            UserId : req.params.id
+            UploaderUserId : req.params.id
         }
     })
 
