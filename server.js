@@ -16,6 +16,7 @@ import AuthenticateRouter from './routes/authenticate.route.js'
 import UserRouter from './routes/user.route.js'
 import CommentController from './routes/comment.route.js'
 import AdminRouter from './routes/admin.route.js'
+import RssRouter from './routes/rss.route.js'
 
 
 const app = express()
@@ -55,6 +56,7 @@ app.use("/api/authenticate", AuthenticateRouter)
 app.use("/api/user", UserRouter)
 app.use("/api/comment", CommentController)
 app.use("/api/admin", AdminRouter)
+app.use("/api/rss", RssRouter)
 
 //send angular index.html and use its routing
 app.get('*', (req, res, next) => {
