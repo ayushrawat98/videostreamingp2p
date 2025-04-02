@@ -80,8 +80,8 @@ export const postVideos = async (req, res, next) => {
 
     let videoTitle = req.body.title ?? ""
     let videoDescription = req.body.description ?? ""
-    // const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-    // const newFileName = uniqueSuffix + "-" + req.file.originalname
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+    const newFileName = uniqueSuffix + "-" + req.file.originalname
 
     if (!req.file) {
         return res.status(400).json({ message: "Video file is required" })
@@ -89,13 +89,8 @@ export const postVideos = async (req, res, next) => {
         return res.status(400).json({ message: 'Title is required.' })
     } else {
         try {
-            WebtorrentClient.seed('./public/videos/'+ req.file.filename , async (torrent) => {
-                    let addedVideo = await Videos.create({ title: videoTitle, description: videoDescription, videoPath: req.file.filename, views: 0, UploaderUserId: req.user.id , infoHash : torrent.magnetURI})
-                    generateThumbnail(req.file.filename, addedVideo.id, 'newFileName')
-            })
-            // infoHash : torrent.magnetURI
-            // let addedVideo = await Videos.create({ title: videoTitle, description: videoDescription, videoPath: newFileName, views: 0, UploaderUserId: req.user.id , infoHash : ""})
-            // generateThumbnail(req.file.filename, addedVideo.id, newFileName)
+            let addedVideo = await Videos.create({ title: videoTitle, description: videoDescription, videoPath: newFileName, views: 0, UploaderUserId: req.user.id , infoHash : ''})
+            generateThumbnail(req.file.filename, addedVideo.id, newFileName)
             return res.status(200).json({ message: "Upload completed" })
         } catch (error) {
             console.log(error)
