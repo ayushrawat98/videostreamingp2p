@@ -2,7 +2,7 @@ import generateFast from './generateFast.js'
 import Ffmpeg from 'fluent-ffmpeg';
 
 function generateThumbnail(path, filename, newFileName) {
-  Ffmpeg.setFfmpegPath('C:\\Users\\aayus\\Downloads\\ffmpeg-master-latest-win64-gpl\\bin\\ffmpeg.exe')
+  // Ffmpeg.setFfmpegPath('C:\\Users\\aayus\\Downloads\\ffmpeg-master-latest-win64-gpl\\bin\\ffmpeg.exe')
   // Generate the thumbnail
 
   Ffmpeg(`public/videos/${path}`)
